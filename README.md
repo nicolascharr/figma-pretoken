@@ -1,7 +1,5 @@
 # Pretoken
 
-*(formerly "Design Cleaner & Token Prepper")*
-
 A Figma plugin that finds the **hard-coded values** scattered across a free-form
 mockup — solid colors, gradients and orphan text styles that aren't linked to any
 style or variable — clusters them by perceptual / structural similarity, and lets
