@@ -1,0 +1,519 @@
+/* Figma-native look: Inter, 11px base, theme variables injected via themeColors. */
+:root {
+  --bg: var(--figma-color-bg, #ffffff);
+  --bg-2: var(--figma-color-bg-secondary, #f5f5f5);
+  --bg-3: var(--figma-color-bg-tertiary, #e6e6e6);
+  --bg-hover: var(--figma-color-bg-hover, #00000008);
+  --text: var(--figma-color-text, #1a1a1a);
+  --text-2: var(--figma-color-text-secondary, #6b6b6b);
+  --border: var(--figma-color-border, #e6e6e6);
+  --brand: var(--figma-color-bg-brand, #0d99ff);
+  --brand-text: var(--figma-color-text-onbrand, #ffffff);
+  --danger: var(--figma-color-text-danger, #e03e3e);
+  --success: var(--figma-color-text-success, #198f51);
+  --success-bg: var(--figma-color-bg-success-tertiary, #ebffee);
+  --warning: var(--figma-color-text-warning, #975102);
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 1px solid var(--brand);
+  outline-offset: 1px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--text);
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.hidden {
+  display: none !important;
+}
+.muted {
+  color: var(--text-2);
+}
+
+/* -------------------------------- tabs -------------------------------- */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  flex: none;
+}
+.tab {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--text-2);
+  font: inherit;
+  font-weight: 600;
+  flex: 1 1 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 8px 8px;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  cursor: pointer;
+}
+.tab svg {
+  flex: none;
+}
+.tab:hover {
+  color: var(--text);
+  background: var(--bg-hover);
+}
+.tab.active {
+  color: var(--text);
+  border-bottom-color: var(--brand);
+}
+.icon-btn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--text-2);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.icon-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+.icon-btn.active {
+  background: var(--bg-2);
+  color: var(--text);
+}
+
+/* ------------------------------ settings ------------------------------ */
+.settings {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-2);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.field {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 8px;
+}
+.field > span {
+  grid-column: 1 / -1;
+  font-weight: 600;
+}
+.field input[type='range'] {
+  width: 100%;
+}
+.field output {
+  font-variant-numeric: tabular-nums;
+  color: var(--text-2);
+}
+select,
+input[type='text'],
+input[type='number'] {
+  font: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 7px;
+  outline: none;
+}
+select:focus,
+input[type='text']:focus,
+input[type='number']:focus {
+  border-color: var(--brand);
+}
+.toggles {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.toggles label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+/* ------------------------------ scan bar ------------------------------ */
+.scanbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 8px 8px 12px;
+  border-bottom: 1px solid var(--border);
+  flex: none;
+}
+.scanbar .hint {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.scanbar .icon-btn {
+  flex: none;
+}
+.btn-primary {
+  appearance: none;
+  border: none;
+  background: var(--brand);
+  color: var(--brand-text);
+  font: inherit;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  filter: brightness(0.95);
+}
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.btn-secondary {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  padding: 5px 13px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn-secondary:hover {
+  background: var(--bg-2);
+}
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.hint {
+  color: var(--text-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ------------------------------- content ------------------------------ */
+#content {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  position: relative;
+}
+.panel {
+  padding: 8px;
+}
+.empty {
+  text-align: center;
+  padding: 40px 24px;
+}
+.empty p {
+  margin: 4px 0;
+}
+
+/* -------------------------------- group ------------------------------- */
+.group {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  background: var(--bg);
+}
+.group-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--border);
+}
+.group-head input[type='checkbox'] {
+  flex: none;
+  margin: 0;
+}
+.group-title {
+  font-weight: 600;
+}
+.group-sub {
+  color: var(--text-2);
+  font-weight: 400;
+}
+.group-body {
+  padding: 8px 10px;
+}
+
+/* row of a swatch / variant */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 2px;
+  border-radius: 6px;
+}
+.row:hover {
+  background: var(--bg-hover);
+}
+.row input[type='checkbox'] {
+  flex: none;
+}
+.chip {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background-clip: padding-box;
+}
+.chip.checker {
+  background-image: linear-gradient(45deg, #ccc 25%, transparent 25%),
+    linear-gradient(-45deg, #ccc 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #ccc 75%),
+    linear-gradient(-45deg, transparent 75%, #ccc 75%);
+  background-size: 8px 8px;
+  background-position: 0 0, 0 4px, 4px -4px, -4px 0;
+}
+.grad-bar {
+  flex: none;
+  width: 46px;
+  height: 18px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+.hex {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+  letter-spacing: 0.02em;
+}
+.row .meta {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.count-btn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--text-2);
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  border-radius: 5px;
+  padding: 2px 6px;
+  cursor: pointer;
+  flex: none;
+}
+.count-btn:hover {
+  background: var(--bg-2);
+  color: var(--text);
+  text-decoration: underline;
+}
+
+/* a swatch / variant whose usages were merged away */
+.row.merged {
+  opacity: 0.45;
+}
+.row.merged .hex,
+.row.merged .meta {
+  text-decoration: line-through;
+}
+.copy-btn,
+.canonical {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-2);
+  font: inherit;
+  border-radius: 5px;
+  padding: 2px 6px;
+  cursor: pointer;
+  flex: none;
+}
+.copy-btn:hover {
+  color: var(--text);
+  background: var(--bg-2);
+}
+.canonical {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.canonical.active {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
+/* target / replace-by editor */
+.target {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border);
+  flex-wrap: wrap;
+}
+.target label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 10px;
+  color: var(--text-2);
+}
+.target .replace-label {
+  font-weight: 600;
+  color: var(--text);
+}
+.target input[type='text'].hex-input {
+  width: 92px;
+}
+.target input[type='number'] {
+  width: 58px;
+}
+.target .grow {
+  flex: 1 1 auto;
+}
+.target .inline {
+  display: flex;
+  gap: 4px;
+}
+.target .inline input[type='number'] {
+  width: 50px;
+}
+.apply-btn {
+  appearance: none;
+  border: none;
+  background: var(--brand);
+  color: var(--brand-text);
+  font: inherit;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: auto;
+}
+.apply-btn:hover {
+  filter: brightness(0.95);
+}
+.apply-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.preview-chip {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  flex: none;
+}
+input.invalid {
+  border-color: var(--danger) !important;
+}
+
+/* in-place confirmation after a merge */
+.merge-result {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 8px;
+  padding: 7px 9px;
+  border-radius: 6px;
+  background: var(--success-bg);
+  color: var(--success);
+  font-weight: 600;
+  animation: merge-in 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.merge-result .merge-check {
+  flex: none;
+}
+.merge-result .chip.mini {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  flex: none;
+}
+.merge-result .warn {
+  color: var(--warning);
+  font-weight: 400;
+  margin-left: auto;
+}
+@keyframes merge-in {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .merge-result {
+    animation: none;
+  }
+}
+
+/* ------------------------------ progress ------------------------------ */
+.progress {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--bg-3);
+  border-top-color: var(--brand);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ------------------------------ stats bar ----------------------------- */
+.statsbar {
+  flex: none;
+  padding: 6px 12px;
+  border-top: 1px solid var(--border);
+  color: var(--text-2);
+  background: var(--bg-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

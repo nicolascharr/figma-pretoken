@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      /* Figma-native look: Inter, 11px base, theme variables injected via themeColors. */
+:root {
+  --bg: var(--figma-color-bg, #ffffff);
+  --bg-2: var(--figma-color-bg-secondary, #f5f5f5);
+  --bg-3: var(--figma-color-bg-tertiary, #e6e6e6);
+  --bg-hover: var(--figma-color-bg-hover, #00000008);
+  --text: var(--figma-color-text, #1a1a1a);
+  --text-2: var(--figma-color-text-secondary, #6b6b6b);
+  --border: var(--figma-color-border, #e6e6e6);
+  --brand: var(--figma-color-bg-brand, #0d99ff);
+  --brand-text: var(--figma-color-text-onbrand, #ffffff);
+  --danger: var(--figma-color-text-danger, #e03e3e);
+  --success: var(--figma-color-text-success, #198f51);
+  --success-bg: var(--figma-color-bg-success-tertiary, #ebffee);
+  --warning: var(--figma-color-text-warning, #975102);
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 1px solid var(--brand);
+  outline-offset: 1px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--text);
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.hidden {
+  display: none !important;
+}
+.muted {
+  color: var(--text-2);
+}
+
+/* -------------------------------- tabs -------------------------------- */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  flex: none;
+}
+.tab {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--text-2);
+  font: inherit;
+  font-weight: 600;
+  flex: 1 1 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 8px 8px;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  cursor: pointer;
+}
+.tab svg {
+  flex: none;
+}
+.tab:hover {
+  color: var(--text);
+  background: var(--bg-hover);
+}
+.tab.active {
+  color: var(--text);
+  border-bottom-color: var(--brand);
+}
+.icon-btn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--text-2);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.icon-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+.icon-btn.active {
+  background: var(--bg-2);
+  color: var(--text);
+}
+
+/* ------------------------------ settings ------------------------------ */
+.settings {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-2);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.field {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 8px;
+}
+.field > span {
+  grid-column: 1 / -1;
+  font-weight: 600;
+}
+.field input[type='range'] {
+  width: 100%;
+}
+.field output {
+  font-variant-numeric: tabular-nums;
+  color: var(--text-2);
+}
+select,
+input[type='text'],
+input[type='number'] {
+  font: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 7px;
+  outline: none;
+}
+select:focus,
+input[type='text']:focus,
+input[type='number']:focus {
+  border-color: var(--brand);
+}
+.toggles {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.toggles label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+/* ------------------------------ scan bar ------------------------------ */
+.scanbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 8px 8px 12px;
+  border-bottom: 1px solid var(--border);
+  flex: none;
+}
+.scanbar .hint {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.scanbar .icon-btn {
+  flex: none;
+}
+.btn-primary {
+  appearance: none;
+  border: none;
+  background: var(--brand);
+  color: var(--brand-text);
+  font: inherit;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  filter: brightness(0.95);
+}
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.btn-secondary {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  padding: 5px 13px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn-secondary:hover {
+  background: var(--bg-2);
+}
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.hint {
+  color: var(--text-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ------------------------------- content ------------------------------ */
+#content {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  position: relative;
+}
+.panel {
+  padding: 8px;
+}
+.empty {
+  text-align: center;
+  padding: 40px 24px;
+}
+.empty p {
+  margin: 4px 0;
+}
+
+/* -------------------------------- group ------------------------------- */
+.group {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  background: var(--bg);
+}
+.group-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--border);
+}
+.group-head input[type='checkbox'] {
+  flex: none;
+  margin: 0;
+}
+.group-title {
+  font-weight: 600;
+}
+.group-sub {
+  color: var(--text-2);
+  font-weight: 400;
+}
+.group-body {
+  padding: 8px 10px;
+}
+
+/* row of a swatch / variant */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 2px;
+  border-radius: 6px;
+}
+.row:hover {
+  background: var(--bg-hover);
+}
+.row input[type='checkbox'] {
+  flex: none;
+}
+.chip {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background-clip: padding-box;
+}
+.chip.checker {
+  background-image: linear-gradient(45deg, #ccc 25%, transparent 25%),
+    linear-gradient(-45deg, #ccc 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #ccc 75%),
+    linear-gradient(-45deg, transparent 75%, #ccc 75%);
+  background-size: 8px 8px;
+  background-position: 0 0, 0 4px, 4px -4px, -4px 0;
+}
+.grad-bar {
+  flex: none;
+  width: 46px;
+  height: 18px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+.hex {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+  letter-spacing: 0.02em;
+}
+.row .meta {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.count-btn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--text-2);
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  border-radius: 5px;
+  padding: 2px 6px;
+  cursor: pointer;
+  flex: none;
+}
+.count-btn:hover {
+  background: var(--bg-2);
+  color: var(--text);
+  text-decoration: underline;
+}
+
+/* a swatch / variant whose usages were merged away */
+.row.merged {
+  opacity: 0.45;
+}
+.row.merged .hex,
+.row.merged .meta {
+  text-decoration: line-through;
+}
+.copy-btn,
+.canonical {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-2);
+  font: inherit;
+  border-radius: 5px;
+  padding: 2px 6px;
+  cursor: pointer;
+  flex: none;
+}
+.copy-btn:hover {
+  color: var(--text);
+  background: var(--bg-2);
+}
+.canonical {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.canonical.active {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
+/* target / replace-by editor */
+.target {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border);
+  flex-wrap: wrap;
+}
+.target label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 10px;
+  color: var(--text-2);
+}
+.target .replace-label {
+  font-weight: 600;
+  color: var(--text);
+}
+.target input[type='text'].hex-input {
+  width: 92px;
+}
+.target input[type='number'] {
+  width: 58px;
+}
+.target .grow {
+  flex: 1 1 auto;
+}
+.target .inline {
+  display: flex;
+  gap: 4px;
+}
+.target .inline input[type='number'] {
+  width: 50px;
+}
+.apply-btn {
+  appearance: none;
+  border: none;
+  background: var(--brand);
+  color: var(--brand-text);
+  font: inherit;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: auto;
+}
+.apply-btn:hover {
+  filter: brightness(0.95);
+}
+.apply-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.preview-chip {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  flex: none;
+}
+input.invalid {
+  border-color: var(--danger) !important;
+}
+
+/* in-place confirmation after a merge */
+.merge-result {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 8px;
+  padding: 7px 9px;
+  border-radius: 6px;
+  background: var(--success-bg);
+  color: var(--success);
+  font-weight: 600;
+  animation: merge-in 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.merge-result .merge-check {
+  flex: none;
+}
+.merge-result .chip.mini {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  flex: none;
+}
+.merge-result .warn {
+  color: var(--warning);
+  font-weight: 400;
+  margin-left: auto;
+}
+@keyframes merge-in {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .merge-result {
+    animation: none;
+  }
+}
+
+/* ------------------------------ progress ------------------------------ */
+.progress {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--bg-3);
+  border-top-color: var(--brand);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ------------------------------ stats bar ----------------------------- */
+.statsbar {
+  flex: none;
+  padding: 6px 12px;
+  border-top: 1px solid var(--border);
+  color: var(--text-2);
+  background: var(--bg-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+    </style>
+  </head>
+  <body>
+    <header class="scanbar">
+      <button type="button" id="scanPageBtn" class="btn-primary">Scan page</button>
+      <button type="button" id="scanFileBtn" class="btn-secondary" title="Scan every page of the file">Scan file</button>
+      <span id="scopeHint" class="hint">Scan page covers the current page</span>
+      <button type="button" id="settingsBtn" class="icon-btn" title="Scan options" aria-label="Scan options" aria-expanded="false">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3" />
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+        </svg>
+      </button>
+    </header>
+
+    <section id="settings" class="settings hidden">
+      <label class="field">
+        <span>Color similarity threshold (Delta E)</span>
+        <input id="optThreshold" type="range" min="1" max="20" step="0.5" value="5" />
+        <output id="optThresholdOut">5</output>
+      </label>
+      <label class="field">
+        <span>Distance metric</span>
+        <select id="optMetric">
+          <option value="ciede2000" selected>CIEDE2000 (accurate)</option>
+          <option value="cie76">CIE76 (fast)</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>Font size grouping range (px)</span>
+        <input id="optFontTol" type="range" min="0.5" max="4" step="0.5" value="1" />
+        <output id="optFontTolOut">1</output>
+      </label>
+      <div class="toggles">
+        <label><input type="checkbox" id="optInstances" checked /> Include component instances</label>
+        <label><input type="checkbox" id="optLocked" /> Include locked layers</label>
+        <label><input type="checkbox" id="optHidden" /> Include hidden layers</label>
+      </div>
+    </section>
+
+    <nav class="tabs" role="tablist">
+      <button type="button" class="tab active" data-tab="color" role="tab" aria-selected="true" aria-controls="panel-color">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2.7c3.3 4 6 7.3 6 10.3a6 6 0 1 1-12 0c0-3 2.7-6.3 6-10.3z" />
+        </svg>
+        Color Merger
+      </button>
+      <button type="button" class="tab" data-tab="font" role="tab" aria-selected="false" aria-controls="panel-font">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 7V4h16v3" />
+          <path d="M9 20h6" />
+          <path d="M12 4v16" />
+        </svg>
+        Font Merger
+      </button>
+    </nav>
+
+    <main id="content">
+      <div id="panel-color" class="panel" role="tabpanel">
+        <div id="colorGroups"></div>
+        <div id="colorEmpty" class="empty">
+          <p>No hard-coded colors yet.</p>
+          <p class="muted">Scan the current page or the whole file to find solid colors and gradients that aren't linked to a style or variable.</p>
+        </div>
+      </div>
+      <div id="panel-font" class="panel hidden" role="tabpanel">
+        <div id="fontGroups"></div>
+        <div id="fontEmpty" class="empty">
+          <p>No orphan text styles yet.</p>
+          <p class="muted">Scan the current page or the whole file to find text that isn't linked to a text style.</p>
+        </div>
+      </div>
+      <div id="progress" class="progress hidden">
+        <div class="spinner"></div>
+        <span id="progressText">Scanning…</span>
+      </div>
+    </main>
+
+    <footer id="statsBar" class="statsbar hidden"></footer>
+
+    <script>
+      "use strict";
+(() => {
+  // src/shared/types.ts
+  function postToCode(msg) {
+    parent.postMessage({ pluginMessage: msg }, "*");
+  }
+
+  // src/shared/color.ts
+  function clamp01(x) {
+    return x < 0 ? 0 : x > 1 ? 1 : x;
+  }
+  function rgbToHex({ r, g, b }) {
+    const to = (v) => Math.round(clamp01(v) * 255).toString(16).padStart(2, "0");
+    return `#${to(r)}${to(g)}${to(b)}`.toUpperCase();
+  }
+  function hexToRgb(hex) {
+    let h = hex.trim().replace(/^#/, "");
+    if (h.length === 3) h = h.split("").map((c) => c + c).join("");
+    if (!/^[0-9a-fA-F]{6}$/.test(h)) return null;
+    return {
+      r: parseInt(h.slice(0, 2), 16) / 255,
+      g: parseInt(h.slice(2, 4), 16) / 255,
+      b: parseInt(h.slice(4, 6), 16) / 255
+    };
+  }
+
+  // src/shared/fontCluster.ts
+  var WEIGHT_NAMES = [
+    ["extralight", 200],
+    ["ultralight", 200],
+    ["extrabold", 800],
+    ["ultrabold", 800],
+    ["semibold", 600],
+    ["demibold", 600],
+    ["hairline", 100],
+    ["regular", 400],
+    ["medium", 500],
+    ["normal", 400],
+    ["light", 300],
+    ["heavy", 900],
+    ["black", 900],
+    ["roman", 400],
+    ["thin", 100],
+    ["bold", 700],
+    ["demi", 600],
+    ["book", 400]
+  ];
+  function styleWeight(fontStyle) {
+    const s = fontStyle.toLowerCase().replace(/[\s_-]/g, "");
+    for (const [name, w] of WEIGHT_NAMES) if (s.indexOf(name) !== -1) return w;
+    return 400;
+  }
+  var CANONICAL_WEIGHT = {
+    100: "Thin",
+    200: "Extra Light",
+    300: "Light",
+    400: "Regular",
+    500: "Medium",
+    600: "Semi Bold",
+    700: "Bold",
+    800: "Extra Bold",
+    900: "Black"
+  };
+  function weightName(w) {
+    var _a;
+    return (_a = CANONICAL_WEIGHT[w]) != null ? _a : "Regular";
+  }
+
+  // src/ui/ui.ts
+  function el(tag, attrs = {}, children = []) {
+    const node = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k === "class") node.className = String(v);
+      else if (k.startsWith("on") && typeof v === "function") {
+        node.addEventListener(k.slice(2), v);
+      } else if (typeof v === "boolean") {
+        if (v) node.setAttribute(k, "");
+      } else {
+        node.setAttribute(k, String(v));
+      }
+    }
+    if (tag === "button" && !node.hasAttribute("type")) node.setAttribute("type", "button");
+    for (const c of children) node.append(c);
+    return node;
+  }
+  function $(id) {
+    const e = document.getElementById(id);
+    if (!e) throw new Error(`Missing element #${id}`);
+    return e;
+  }
+  function hexWithAlpha(hex, opacity) {
+    var _a;
+    const rgb = (_a = hexToRgb(hex)) != null ? _a : { r: 0, g: 0, b: 0 };
+    return `rgba(${Math.round(rgb.r * 255)}, ${Math.round(rgb.g * 255)}, ${Math.round(
+      rgb.b * 255
+    )}, ${opacity})`;
+  }
+  function gradientCss(type, stops) {
+    const list = [...stops].sort((a, b) => a.position - b.position).map((s) => `${hexWithAlpha(s.hex, s.opacity)} ${Math.round(s.position * 100)}%`).join(", ");
+    switch (type) {
+      case "GRADIENT_RADIAL":
+      case "GRADIENT_DIAMOND":
+        return `radial-gradient(circle at 50% 50%, ${list})`;
+      case "GRADIENT_ANGULAR":
+        return `conic-gradient(from 0deg at 50% 50%, ${list})`;
+      default:
+        return `linear-gradient(90deg, ${list})`;
+    }
+  }
+  function gradientTypeLabel(t) {
+    var _a;
+    return (_a = {
+      GRADIENT_LINEAR: "Linear",
+      GRADIENT_RADIAL: "Radial",
+      GRADIENT_ANGULAR: "Angular",
+      GRADIENT_DIAMOND: "Diamond"
+    }[t]) != null ? _a : t;
+  }
+  function fontTargetLabel(v) {
+    const parts = [`${v.fontFamily} ${v.fontStyle}`, `${round(v.fontSize)}px`];
+    if (v.lineHeight.unit === "AUTO") parts.push("Auto LH");
+    else if (v.lineHeight.unit === "PIXELS") parts.push(`${round(v.lineHeight.value)}px LH`);
+    else parts.push(`${round(v.lineHeight.value)}% LH`);
+    if (v.letterSpacing.unit === "PIXELS") parts.push(`${round(v.letterSpacing.value)}px LS`);
+    else parts.push(`${round(v.letterSpacing.value)}% LS`);
+    return parts.join("  \xB7  ");
+  }
+  function round(n) {
+    return Math.round(n * 100) / 100;
+  }
+  function copyText(text) {
+    const done = () => postToCode({ type: "notify", message: `Copied ${text}` });
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, () => fallbackCopy(text, done));
+    } else {
+      fallbackCopy(text, done);
+    }
+  }
+  function fallbackCopy(text, done) {
+    const ta = el("textarea", {});
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.append(ta);
+    ta.select();
+    try {
+      document.execCommand("copy");
+    } catch (e) {
+    }
+    ta.remove();
+    done();
+  }
+  var applyDoneHandlers = /* @__PURE__ */ new Map();
+  var applyResetHandlers = /* @__PURE__ */ new Map();
+  var inflightGroupId = null;
+  function beginApply(groupId, btn, busyLabel) {
+    inflightGroupId = groupId;
+    btn.disabled = true;
+    btn.textContent = busyLabel;
+  }
+  function mergeResultLine(failed, text, chipColor) {
+    const children = [el("span", { class: "merge-check" }, ["\u2713"])];
+    if (chipColor) {
+      const chip = el("span", { class: "chip mini" });
+      chip.style.background = chipColor;
+      children.push(chip);
+    }
+    children.push(el("span", {}, [text]));
+    if (failed > 0) children.push(el("span", { class: "warn" }, [`${failed} skipped`]));
+    return el("div", { class: "merge-result" }, children);
+  }
+  function renderColorGroups(groups) {
+    const host = $("colorGroups");
+    host.replaceChildren();
+    $("colorEmpty").classList.toggle("hidden", groups.length > 0);
+    groups.forEach((g, i) => {
+      host.append(g.kind === "solid" ? renderSolidGroup(g, i) : renderGradientGroup(g, i));
+    });
+  }
+  function wireMaster(master, checks) {
+    const sync = () => {
+      const boxes = [...checks.values()].filter((c) => !c.disabled);
+      const n = boxes.filter((c) => c.checked).length;
+      master.checked = boxes.length > 0 && n === boxes.length;
+      master.indeterminate = n > 0 && n < boxes.length;
+      master.disabled = boxes.length === 0;
+    };
+    master.addEventListener("change", () => {
+      for (const c of checks.values()) if (!c.disabled) c.checked = master.checked;
+      sync();
+    });
+    for (const c of checks.values()) c.addEventListener("change", sync);
+    sync();
+    return sync;
+  }
+  function countBtn(kind, refId, count) {
+    const b = el(
+      "button",
+      { class: "count-btn", title: "Select these layers on canvas" },
+      [`${count}\xD7`]
+    );
+    b.addEventListener("click", (e) => {
+      e.preventDefault();
+      postToCode({ type: "select-usages", kind, refId });
+    });
+    return b;
+  }
+  function markRowMerged(cb) {
+    var _a;
+    cb.checked = false;
+    cb.disabled = true;
+    (_a = cb.closest(".row")) == null ? void 0 : _a.classList.add("merged");
+  }
+  function renderSolidGroup(group, i) {
+    const checks = /* @__PURE__ */ new Map();
+    const rowHex = /* @__PURE__ */ new Map();
+    const rows = group.swatches.map((sw) => {
+      rowHex.set(sw.id, sw.hex.toUpperCase());
+      return renderSolidRow(sw, checks);
+    });
+    const preview = el("div", { class: "preview-chip" });
+    const hexInput = el("input", {
+      type: "text",
+      class: "hex-input",
+      value: group.suggestedHex,
+      spellcheck: false,
+      "aria-label": "Replacement hex color"
+    });
+    const syncPreview = () => {
+      const rgb = hexToRgb(hexInput.value);
+      hexInput.classList.toggle("invalid", !rgb);
+      preview.style.background = rgb ? rgbToHex(rgb) : "transparent";
+    };
+    hexInput.addEventListener("input", syncPreview);
+    syncPreview();
+    const banner = el("div", { class: "merge-host" });
+    const applyBtn = el("button", { class: "apply-btn" }, ["Apply merge"]);
+    const target = el("div", { class: "target" }, [
+      el("span", { class: "replace-label" }, ["Replace by"]),
+      preview,
+      hexInput,
+      applyBtn
+    ]);
+    const masterCb = el("input", { type: "checkbox", title: "Select all shades" });
+    const syncMaster = wireMaster(masterCb, checks);
+    applyBtn.addEventListener("click", () => {
+      const rgb = hexToRgb(hexInput.value);
+      if (!rgb) {
+        hexInput.classList.add("invalid");
+        return;
+      }
+      const targetHex = rgbToHex(rgb);
+      const checked = [...checks.entries()].filter(([, c]) => c.checked && !c.disabled).map(([id]) => id);
+      if (checked.length === 0) {
+        postToCode({ type: "notify", message: "No shades selected." });
+        return;
+      }
+      beginApply(group.id, applyBtn, "Merging\u2026");
+      applyDoneHandlers.set(group.id, (applied, failed) => {
+        for (const id of checked) {
+          if (rowHex.get(id) === targetHex) continue;
+          const cb = checks.get(id);
+          if (cb) markRowMerged(cb);
+        }
+        banner.replaceChildren(
+          mergeResultLine(failed, `Merged ${applied} usage(s) into ${targetHex}`, targetHex)
+        );
+        syncMaster();
+        const mergeable = [...checks.entries()].filter(
+          ([id, c]) => !c.disabled && rowHex.get(id) !== targetHex
+        );
+        if (mergeable.length === 0) {
+          target.classList.add("hidden");
+        } else {
+          applyBtn.disabled = false;
+          applyBtn.textContent = "Apply merge";
+        }
+      });
+      applyResetHandlers.set(group.id, () => {
+        applyBtn.disabled = false;
+        applyBtn.textContent = "Apply merge";
+      });
+      postToCode({
+        type: "apply-solid",
+        groupId: group.id,
+        checkedSwatchIds: checked,
+        targetHex
+      });
+    });
+    return el("section", { class: "group" }, [
+      groupHead(`Solid group ${i + 1}`, `${group.swatches.length} shade(s)`, masterCb),
+      el("div", { class: "group-body" }, [...rows, banner, target])
+    ]);
+  }
+  function renderSolidRow(sw, checks) {
+    const cb = el("input", { type: "checkbox", checked: true });
+    checks.set(sw.id, cb);
+    const chip = el("div", { class: sw.opacity < 1 ? "chip checker" : "chip" });
+    chip.style.background = hexWithAlpha(sw.hex, sw.opacity);
+    const copy = el("button", { class: "copy-btn", title: "Copy hex" }, ["Copy"]);
+    copy.addEventListener("click", (e) => {
+      e.preventDefault();
+      copyText(sw.hex);
+    });
+    return el("label", { class: "row" }, [
+      cb,
+      chip,
+      el("span", { class: "meta hex" }, [sw.opacity < 1 ? `${sw.hex} \xB7 ${Math.round(sw.opacity * 100)}%` : sw.hex]),
+      copy,
+      countBtn("solid", sw.id, sw.count)
+    ]);
+  }
+  function renderGradientGroup(group, i) {
+    const checks = /* @__PURE__ */ new Map();
+    let canonicalId = group.canonicalId;
+    const canonButtons = /* @__PURE__ */ new Map();
+    const setCanonical = (id) => {
+      canonicalId = id;
+      for (const [vid, btn] of canonButtons) btn.classList.toggle("active", vid === id);
+    };
+    const rows = group.variants.map(
+      (v) => renderGradientRow(v, group.gradientType, checks, canonButtons, setCanonical)
+    );
+    const banner = el("div", { class: "merge-host" });
+    const applyBtn = el("button", { class: "apply-btn" }, ["Unify gradients"]);
+    const target = el("div", { class: "target" }, [
+      el("span", { class: "replace-label" }, ["Unify to \u2605 canonical"]),
+      el("span", { class: "grow muted" }, ["Pick a target with \u2605, then unify the checked variants."]),
+      applyBtn
+    ]);
+    const masterCb = el("input", { type: "checkbox", title: "Select all variants" });
+    const syncMaster = wireMaster(masterCb, checks);
+    applyBtn.addEventListener("click", () => {
+      const checked = [...checks.entries()].filter(([, c]) => c.checked && !c.disabled).map(([id]) => id);
+      if (checked.length === 0) {
+        postToCode({ type: "notify", message: "No gradients selected." });
+        return;
+      }
+      const canonical = canonicalId;
+      beginApply(group.id, applyBtn, "Unifying\u2026");
+      applyDoneHandlers.set(group.id, (applied, failed) => {
+        for (const id of checked) {
+          if (id === canonical) continue;
+          const cb = checks.get(id);
+          if (cb) markRowMerged(cb);
+        }
+        banner.replaceChildren(
+          mergeResultLine(failed, `Unified ${applied} gradient usage(s)`)
+        );
+        syncMaster();
+        const mergeable = [...checks.entries()].filter(
+          ([id, c]) => !c.disabled && id !== canonical
+        );
+        if (mergeable.length === 0) {
+          target.classList.add("hidden");
+        } else {
+          applyBtn.disabled = false;
+          applyBtn.textContent = "Unify gradients";
+        }
+      });
+      applyResetHandlers.set(group.id, () => {
+        applyBtn.disabled = false;
+        applyBtn.textContent = "Unify gradients";
+      });
+      postToCode({
+        type: "apply-gradient",
+        groupId: group.id,
+        checkedVariantIds: checked,
+        canonicalVariantId: canonical
+      });
+    });
+    setCanonical(canonicalId);
+    return el("section", { class: "group" }, [
+      groupHead(
+        `Gradient group ${i + 1}`,
+        `${gradientTypeLabel(group.gradientType)} \xB7 ${group.variants.length} variant(s)`,
+        masterCb
+      ),
+      el("div", { class: "group-body" }, [...rows, banner, target])
+    ]);
+  }
+  function renderGradientRow(v, type, checks, canonButtons, setCanonical) {
+    const cb = el("input", { type: "checkbox", checked: true });
+    checks.set(v.id, cb);
+    const bar = el("div", { class: "grad-bar" });
+    bar.style.background = gradientCss(type, v.stops);
+    const copy = el("button", { class: "copy-btn", title: "Copy representative hex" }, ["Copy"]);
+    copy.addEventListener("click", (e) => {
+      e.preventDefault();
+      copyText(v.representativeHex);
+    });
+    const canon = el("button", { class: "canonical", title: "Use as canonical target" }, ["\u2605"]);
+    canon.addEventListener("click", (e) => {
+      e.preventDefault();
+      setCanonical(v.id);
+    });
+    canonButtons.set(v.id, canon);
+    return el("label", { class: "row" }, [
+      cb,
+      bar,
+      el("span", { class: "meta hex" }, [`~ ${v.representativeHex}`]),
+      copy,
+      countBtn("gradient", v.id, v.count),
+      canon
+    ]);
+  }
+  function renderFontGroups(groups) {
+    const host = $("fontGroups");
+    host.replaceChildren();
+    $("fontEmpty").classList.toggle("hidden", groups.length > 0);
+    groups.forEach((g) => host.append(renderFontGroup(g)));
+  }
+  function renderFontGroup(group) {
+    const checks = /* @__PURE__ */ new Map();
+    const rowLabel = /* @__PURE__ */ new Map();
+    const rows = group.variants.map((v) => {
+      const cb = el("input", { type: "checkbox", checked: true });
+      checks.set(v.id, cb);
+      rowLabel.set(v.id, fontTargetLabel(v));
+      const copy = el("button", { class: "copy-btn", title: "Copy style" }, ["Copy"]);
+      copy.addEventListener("click", (e) => {
+        e.preventDefault();
+        copyText(fontTargetLabel(v));
+      });
+      return el("label", { class: "row" }, [
+        cb,
+        el("span", { class: "meta" }, [fontTargetLabel(v)]),
+        copy,
+        countBtn("font", v.id, v.count)
+      ]);
+    });
+    const s = group.suggested;
+    const familyIn = el("input", { type: "text", value: s.fontFamily, spellcheck: false, "aria-label": "Font family" });
+    familyIn.style.width = "110px";
+    const styleIn = el("input", { type: "text", value: s.fontStyle, spellcheck: false, "aria-label": "Font style" });
+    styleIn.style.width = "90px";
+    const sizeIn = el("input", { type: "number", min: "1", step: "0.5", value: String(round(s.fontSize)), "aria-label": "Font size" });
+    const lhValue = el("input", { type: "number", step: "0.5", value: String(round(s.lineHeight.value)), "aria-label": "Line height value" });
+    const lhUnit = el("select", { "aria-label": "Line height unit" }, [
+      optionEl("PIXELS", "px"),
+      optionEl("PERCENT", "%"),
+      optionEl("AUTO", "auto")
+    ]);
+    lhUnit.value = s.lineHeight.unit;
+    const syncLh = () => lhValue.disabled = lhUnit.value === "AUTO";
+    lhUnit.addEventListener("change", syncLh);
+    syncLh();
+    const lsValue = el("input", { type: "number", step: "0.5", value: String(round(s.letterSpacing.value)), "aria-label": "Letter spacing value" });
+    const lsUnit = el("select", { "aria-label": "Letter spacing unit" }, [optionEl("PIXELS", "px"), optionEl("PERCENT", "%")]);
+    lsUnit.value = s.letterSpacing.unit;
+    const banner = el("div", { class: "merge-host" });
+    const applyBtn = el("button", { class: "apply-btn" }, ["Apply style"]);
+    const masterCb = el("input", { type: "checkbox", title: "Select all styles" });
+    const syncMaster = wireMaster(masterCb, checks);
+    applyBtn.addEventListener("click", () => {
+      const checked = [...checks.entries()].filter(([, c]) => c.checked && !c.disabled).map(([id]) => id);
+      if (checked.length === 0) {
+        postToCode({ type: "notify", message: "No styles selected." });
+        return;
+      }
+      const size = parseFloat(sizeIn.value);
+      if (!isFinite(size) || size <= 0) {
+        sizeIn.classList.add("invalid");
+        return;
+      }
+      sizeIn.classList.remove("invalid");
+      const targetStyle = {
+        fontFamily: familyIn.value.trim(),
+        fontStyle: styleIn.value.trim() || "Regular",
+        fontSize: size,
+        lineHeight: lhUnit.value === "AUTO" ? { unit: "AUTO", value: 0 } : { unit: lhUnit.value, value: parseFloat(lhValue.value) || 0 },
+        letterSpacing: {
+          unit: lsUnit.value,
+          value: parseFloat(lsValue.value) || 0
+        }
+      };
+      const targetLabel = fontTargetLabel(targetStyle);
+      beginApply(group.id, applyBtn, "Applying\u2026");
+      applyDoneHandlers.set(group.id, (applied, failed) => {
+        for (const id of checked) {
+          if (rowLabel.get(id) === targetLabel) continue;
+          const cb = checks.get(id);
+          if (cb) markRowMerged(cb);
+        }
+        banner.replaceChildren(
+          mergeResultLine(failed, `Restyled ${applied} text range(s) to ${targetLabel}`)
+        );
+        syncMaster();
+        const mergeable = [...checks.entries()].filter(
+          ([id, c]) => !c.disabled && rowLabel.get(id) !== targetLabel
+        );
+        if (mergeable.length === 0) {
+          target.classList.add("hidden");
+        } else {
+          applyBtn.disabled = false;
+          applyBtn.textContent = "Apply style";
+        }
+      });
+      applyResetHandlers.set(group.id, () => {
+        applyBtn.disabled = false;
+        applyBtn.textContent = "Apply style";
+      });
+      postToCode({
+        type: "apply-font",
+        groupId: group.id,
+        checkedVariantIds: checked,
+        target: targetStyle
+      });
+    });
+    const target = el("div", { class: "target" }, [
+      labeled("Family", familyIn),
+      labeled("Style", styleIn),
+      labeled("Size", sizeIn),
+      labeled("Line height", el("span", { class: "inline" }, [lhValue, lhUnit])),
+      labeled("Letter spacing", el("span", { class: "inline" }, [lsValue, lsUnit])),
+      applyBtn
+    ]);
+    const sizes = group.variants.map((v) => v.fontSize);
+    const minSize = round(Math.min(...sizes));
+    const maxSize = round(Math.max(...sizes));
+    const sizeLabel = minSize === maxSize ? `${minSize}px` : `${minSize}\u2013${maxSize}px`;
+    const weights = group.variants.map((v) => styleWeight(v.fontStyle));
+    const minW = Math.min(...weights);
+    const maxW = Math.max(...weights);
+    const weightLabel = minW === maxW ? weightName(minW) : `${weightName(minW)}\u2013${weightName(maxW)}`;
+    return el("section", { class: "group" }, [
+      groupHead(
+        group.fontFamily,
+        `${weightLabel} \xB7 ${sizeLabel} \xB7 ${group.variants.length} style(s)`,
+        masterCb
+      ),
+      el("div", { class: "group-body" }, [...rows, banner, target])
+    ]);
+  }
+  function labeled(label, control) {
+    return el("label", {}, [el("span", {}, [label]), control]);
+  }
+  function optionEl(value, label) {
+    return el("option", { value }, [label]);
+  }
+  function groupHead(title, sub, master) {
+    const children = [];
+    if (master) children.push(master);
+    children.push(
+      el("span", { class: "group-title" }, [title, " ", el("span", { class: "group-sub" }, [`\xB7 ${sub}`])])
+    );
+    return el("div", { class: "group-head" }, children);
+  }
+  function getOptions(scope) {
+    return {
+      scope,
+      includeLocked: $("optLocked").checked,
+      includeHidden: $("optHidden").checked,
+      includeInstances: $("optInstances").checked,
+      colorThreshold: parseFloat($("optThreshold").value) || 5,
+      metric: $("optMetric").value === "cie76" ? "cie76" : "ciede2000",
+      fontSizeTolerance: parseFloat($("optFontTol").value) || 0
+    };
+  }
+  function setTab(tab) {
+    document.querySelectorAll(".tab").forEach((t) => {
+      const active = t.dataset.tab === tab;
+      t.classList.toggle("active", active);
+      t.setAttribute("aria-selected", String(active));
+    });
+    $("panel-color").classList.toggle("hidden", tab !== "color");
+    $("panel-font").classList.toggle("hidden", tab !== "font");
+  }
+  function showProgress(text) {
+    $("progressText").textContent = text;
+    $("progress").classList.remove("hidden");
+  }
+  function hideProgress() {
+    $("progress").classList.add("hidden");
+  }
+  function renderStats(result) {
+    const s = result.stats;
+    const bar = $("statsBar");
+    bar.classList.remove("hidden");
+    const scopeLabel = { selection: "Selection", page: "Page", file: "File" }[result.scope];
+    bar.textContent = `${scopeLabel} \xB7 ${s.nodesScanned} nodes \xB7 ${s.solidUsages} solid \xB7 ${s.gradientUsages} gradient \xB7 ${s.textRanges} text \xB7 ${s.skippedLinked} already linked`;
+  }
+  var scanning = false;
+  var scanWatchdog = 0;
+  var SCAN_LABELS = { page: "Scan page", file: "Scan file" };
+  function scanBtn(scope) {
+    return $(scope === "page" ? "scanPageBtn" : "scanFileBtn");
+  }
+  function startScan(scope) {
+    if (scanning) return;
+    scanning = true;
+    scanBtn("page").disabled = true;
+    scanBtn("file").disabled = true;
+    scanBtn(scope).textContent = "Scanning\u2026";
+    $("content").scrollTop = 0;
+    showProgress("Scanning\u2026");
+    scanWatchdog = window.setTimeout(endScan, 4e3);
+    postToCode({ type: "scan", options: getOptions(scope) });
+  }
+  function endScan() {
+    scanning = false;
+    window.clearTimeout(scanWatchdog);
+    hideProgress();
+    for (const scope of ["page", "file"]) {
+      const btn = scanBtn(scope);
+      btn.disabled = false;
+      btn.textContent = SCAN_LABELS[scope];
+    }
+  }
+  function init() {
+    document.querySelectorAll(".tab").forEach((t) => {
+      t.addEventListener("click", () => setTab(t.dataset.tab === "font" ? "font" : "color"));
+    });
+    const settingsBtn = $("settingsBtn");
+    settingsBtn.addEventListener("click", () => {
+      const hidden = $("settings").classList.toggle("hidden");
+      settingsBtn.setAttribute("aria-expanded", String(!hidden));
+      settingsBtn.classList.toggle("active", !hidden);
+    });
+    const thr = $("optThreshold");
+    const thrOut = $("optThresholdOut");
+    thr.addEventListener("input", () => thrOut.textContent = thr.value);
+    const fontTol = $("optFontTol");
+    const fontTolOut = $("optFontTolOut");
+    fontTol.addEventListener("input", () => fontTolOut.textContent = fontTol.value);
+    scanBtn("page").addEventListener("click", () => startScan("page"));
+    scanBtn("file").addEventListener("click", () => startScan("file"));
+    window.onmessage = (event) => {
+      var _a, _b;
+      const msg = event.data.pluginMessage;
+      if (!msg) return;
+      switch (msg.type) {
+        case "scan-started":
+          window.clearTimeout(scanWatchdog);
+          showProgress(`Scanning ${msg.scope}\u2026`);
+          break;
+        case "scan-progress":
+          showProgress(`Scanning\u2026 ${msg.processed} nodes`);
+          break;
+        case "scan-result":
+          endScan();
+          applyDoneHandlers.clear();
+          applyResetHandlers.clear();
+          inflightGroupId = null;
+          renderColorGroups(msg.result.colorGroups);
+          renderFontGroups(msg.result.fontGroups);
+          renderStats(msg.result);
+          break;
+        case "apply-done":
+          (_a = applyDoneHandlers.get(msg.groupId)) == null ? void 0 : _a(msg.applied, msg.failed);
+          applyDoneHandlers.delete(msg.groupId);
+          applyResetHandlers.delete(msg.groupId);
+          if (inflightGroupId === msg.groupId) inflightGroupId = null;
+          break;
+        case "scope": {
+          const hint = $("scopeHint");
+          hint.textContent = msg.scope === "selection" ? `Scan page covers the selection \xB7 ${msg.count} layer${msg.count > 1 ? "s" : ""}` : "Scan page covers the current page";
+          break;
+        }
+        case "error":
+          if (scanning) endScan();
+          if (inflightGroupId) {
+            (_b = applyResetHandlers.get(inflightGroupId)) == null ? void 0 : _b();
+            applyResetHandlers.delete(inflightGroupId);
+            applyDoneHandlers.delete(inflightGroupId);
+            inflightGroupId = null;
+          }
+          postToCode({ type: "notify", message: `Error: ${msg.message}` });
+          break;
+      }
+    };
+    setTab("color");
+    window.focus();
+  }
+  init();
+})();
+
+    </script>
+  </body>
+</html>

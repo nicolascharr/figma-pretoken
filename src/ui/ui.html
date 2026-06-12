@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      /*__CSS__*/
+    </style>
+  </head>
+  <body>
+    <header class="scanbar">
+      <button type="button" id="scanPageBtn" class="btn-primary">Scan page</button>
+      <button type="button" id="scanFileBtn" class="btn-secondary" title="Scan every page of the file">Scan file</button>
+      <span id="scopeHint" class="hint">Scan page covers the current page</span>
+      <button type="button" id="settingsBtn" class="icon-btn" title="Scan options" aria-label="Scan options" aria-expanded="false">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3" />
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+        </svg>
+      </button>
+    </header>
+
+    <section id="settings" class="settings hidden">
+      <label class="field">
+        <span>Color similarity threshold (Delta E)</span>
+        <input id="optThreshold" type="range" min="1" max="20" step="0.5" value="5" />
+        <output id="optThresholdOut">5</output>
+      </label>
+      <label class="field">
+        <span>Distance metric</span>
+        <select id="optMetric">
+          <option value="ciede2000" selected>CIEDE2000 (accurate)</option>
+          <option value="cie76">CIE76 (fast)</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>Font size grouping range (px)</span>
+        <input id="optFontTol" type="range" min="0.5" max="4" step="0.5" value="1" />
+        <output id="optFontTolOut">1</output>
+      </label>
+      <div class="toggles">
+        <label><input type="checkbox" id="optInstances" checked /> Include component instances</label>
+        <label><input type="checkbox" id="optLocked" /> Include locked layers</label>
+        <label><input type="checkbox" id="optHidden" /> Include hidden layers</label>
+      </div>
+    </section>
+
+    <nav class="tabs" role="tablist">
+      <button type="button" class="tab active" data-tab="color" role="tab" aria-selected="true" aria-controls="panel-color">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2.7c3.3 4 6 7.3 6 10.3a6 6 0 1 1-12 0c0-3 2.7-6.3 6-10.3z" />
+        </svg>
+        Color Merger
+      </button>
+      <button type="button" class="tab" data-tab="font" role="tab" aria-selected="false" aria-controls="panel-font">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 7V4h16v3" />
+          <path d="M9 20h6" />
+          <path d="M12 4v16" />
+        </svg>
+        Font Merger
+      </button>
+    </nav>
+
+    <main id="content">
+      <div id="panel-color" class="panel" role="tabpanel">
+        <div id="colorGroups"></div>
+        <div id="colorEmpty" class="empty">
+          <p>No hard-coded colors yet.</p>
+          <p class="muted">Scan the current page or the whole file to find solid colors and gradients that aren't linked to a style or variable.</p>
+        </div>
+      </div>
+      <div id="panel-font" class="panel hidden" role="tabpanel">
+        <div id="fontGroups"></div>
+        <div id="fontEmpty" class="empty">
+          <p>No orphan text styles yet.</p>
+          <p class="muted">Scan the current page or the whole file to find text that isn't linked to a text style.</p>
+        </div>
+      </div>
+      <div id="progress" class="progress hidden">
+        <div class="spinner"></div>
+        <span id="progressText">Scanning…</span>
+      </div>
+    </main>
+
+    <footer id="statsBar" class="statsbar hidden"></footer>
+
+    <script>
+      //__JS__
+    </script>
+  </body>
+</html>

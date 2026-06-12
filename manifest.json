@@ -1,0 +1,15 @@
+{
+  "name": "Pretoken",
+  "id": "design-cleaner-token-prepper",
+  "api": "1.0.0",
+  "main": "dist/code.js",
+  "ui": "dist/ui.html",
+  "editorType": ["figma"],
+  "documentAccess": "dynamic-page",
+  "networkAccess": {
+    "allowedDomains": ["none"],
+    "reasoning": "The plugin runs fully offline. It only reads and writes nodes in the current document."
+  },
+  "capabilities": [],
+  "enableProposedApi": false
+}
